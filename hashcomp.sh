@@ -6,12 +6,12 @@ if [ "$#" -ne 2 ]; then
     exit 1
 fi
 
-FIRSTHASH=$(sha256sum $1)
-SECONDHASH=$(sha256sum $2)
+FIRSTHASH=$(sha256sum $1 | cut -d ' ' -f1)
+SECONDHASH=$(sha256sum $2 | cut -d ' ' -f1)
 
 if [ "$FIRSTHASH" = "$SECONDHASH" ]; then
-    echo $FIRSTHASH, $2
+    echo "$FIRSTHASH $1, $2"
 else
-    echo $FIRSTHASH
-    echo $SECONDHASH
+    echo "$FIRSTHASH $1"
+    echo "$SECONDHASH $2"
 fi
